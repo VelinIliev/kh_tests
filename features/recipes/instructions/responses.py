@@ -7,3 +7,5 @@ class InstructionResponse(BaseModel):
     category: str
     time: int
     complexity: float
+    recipe_id: int
+    order: int

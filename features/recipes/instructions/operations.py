@@ -28,12 +28,20 @@ def create_instructions_and_calculate_time_and_complexity(instructions_request, 
     old_len = (len([InstructionResponse(**x.__dict__).complexity for x in old_instructions]))
     old_time_to_prepare = (sum([InstructionResponse(**x.__dict__).time for x in old_instructions]))
 
+    find_max_counter = [0, ]
+    find_max_counter.extend([InstructionResponse(**x.__dict__).order for x in old_instructions])
+
+    previous_counter = (max(find_max_counter))
+
     total_complexity = old_total
     total_time_to_prepare = old_time_to_prepare
+    counter = previous_counter
 
     for instruction in instructions:
+        counter += 1
         new_instruction = RecipeInstruction(**instruction.model_dump())
         new_instruction.recipe_id = recipe_id
+        new_instruction.order = counter
         total_time_to_prepare += new_instruction.time
         total_complexity += new_instruction.complexity
         db.add(new_instruction)

@@ -60,6 +60,7 @@ class RecipeInstruction(DbBaseModel):
     category: Mapped[str] = mapped_column(String(100))
     time: Mapped[str] = mapped_column(Integer)
     complexity: Mapped[float] = mapped_column(Float)
+    order: Mapped[int] = mapped_column(Integer, nullable=True, init=False)
 
     recipe_id: Mapped[int] = mapped_column(ForeignKey('RECIPES.id'), nullable=False, init=False)
     recipe: Mapped[Recipe] = relationship('Recipe', back_populates='instructions', init=False)
