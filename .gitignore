@@ -235,6 +235,5 @@ fabric.properties
 .env.prod
 
 *.sqlite
-
 *.db
-.DS_Store
+*.DS_Store

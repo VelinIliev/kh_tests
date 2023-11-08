@@ -4,10 +4,10 @@ from .models import RecipeCategory, Recipe, RecipeInstruction
 from typing import Type
 
 
-def get_all_recipe_categories() -> list[Type[RecipeCategory]]:
+def get_all_recipes() -> list[Type[Recipe]]:
     """
     Get all recipe categories
     :return:
     """
     with db.connection.get_session() as session:
-        return session.query(RecipeCategory).all()
+        return session.query(Recipe).all()

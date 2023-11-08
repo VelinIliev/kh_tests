@@ -40,6 +40,7 @@ class Recipe(DbBaseModel):
     cholesterol: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     time_to_prepare: Mapped[int] = mapped_column(Integer)
     complexity: Mapped[float] = mapped_column(Float, init=False,nullable=True, default=0)
+    complexity: Mapped[float] = mapped_column(Float, init=False,nullable=True, default=0)
     created_by: Mapped[str] = mapped_column(String(30))
     created_on: Mapped[datetime.datetime] = mapped_column(DateTime, server_default=func.current_timestamp(), init=False)
     updated_by: Mapped[Optional[str]] = mapped_column(String(30), nullable=True)
@@ -47,7 +48,7 @@ class Recipe(DbBaseModel):
                                                           onupdate=func.current_timestamp(), init=False)
     category_id: Mapped[int] = mapped_column(ForeignKey("RECIPE_CATEGORIES.id"), nullable=True, init=False)
     category: Mapped[RecipeCategory] = relationship("RecipeCategory", back_populates="recipes", init=False)
-    instructions: Mapped[list["RecipeInstruction"]] = relationship("RecipeInstruction", back_populates="recipe")
+    instructions: Mapped[list["RecipeInstruction"]] = relationship("RecipeInstruction", back_populates="recipe", init=False)
 
 
 class RecipeInstruction(DbBaseModel):
